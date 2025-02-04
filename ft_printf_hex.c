@@ -1,92 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_hex.c                                    :+:      :+:    :+:   */
+/*   ft_printf_hex_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mergarci <mergarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mergarci <mergarci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 10:02:09 by mergarci          #+#    #+#             */
-/*   Updated: 2025/02/03 19:41:31 by mergarci         ###   ########.fr       */
+/*   Created: 2025/02/03 19:37:53 by mergarci          #+#    #+#             */
+/*   Updated: 2025/02/05 00:04:51 by mergarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_digit_hex(long nb)
+static void	ft_printf_hex(char c, char type)
 {
-	int	iter;
-
-	iter = 1;
-	while (nb >= 16)
-	{
-		nb = nb / 16;
-		iter++;
-	}
-	return (iter);
+	if ((type == 'x') || (type == 'p'))
+		ft_putchar_fd(c, 1);
+	else
+		ft_putchar_fd(ft_toupper(c), 1);
 }
 
-static void	ft_fillbytes(int index, char *s)
-{
-	while (index)
-		s[--index] = HEX[15];
-}
-
-static void	ft_toupper_hex(char *s, int digits)
-{
-	int	index;
-
-	index = 0;
-	while (index < digits)
-	{
-		s[index] = ft_toupper(s[index]);
-		index++;
-	}
-	s[index] = '\0';
-	return ;
-}
-
-static void	ft_convert(long int n, char *s, int index, bool is_negative)
+int	ft_convert(long int nb, char type, int n_written)
 {
 	long int	num;
 	long int	mod;
 
-	num = n / 16;
-	mod = n % 16;
-	if (is_negative)
-		mod = 15 - mod;
-	if (num > 16)
-		ft_convert(num, s, index - 1, is_negative);
-	else
+	num = nb / 16;
+	mod = nb % 16;
+	if ((type == 'p') && (n_written == 0))
 	{
-		if (is_negative)
-			num = 15 - num;
-		if (is_negative && index > 0)
-			ft_fillbytes(index, s);
-		if (index > 0)
-			s[index - 1] = HEX[num];
+		ft_putstr_fd("0x", 1);
+		n_written = 2;
 	}
-	s[index] = HEX[mod];
-	return ;
+	if (num > 16)
+		n_written = ft_convert(num, type, n_written++);
+	else if (num > 0)
+	{
+		ft_printf_hex(HEX[num], type);
+		n_written++;
+	}
+	ft_printf_hex(HEX[mod], type);
+	n_written++;
+	return (n_written);
 }
 
-char	*ft_atoi_hex(long int n, char type)
+int	ft_placeholder_hex(va_list vargs, char type)
 {
-	int		digits;
-	char	*s;
-	bool	is_negative;
+	long long int	num;
+	int				n_written;
+	unsigned int	complement;
 
-	is_negative = false;
-	if (n < 0)
+	n_written = 0;
+	num = va_arg(vargs, long long int);
+	if ((type == 'x') || (type == 'X'))
+		num = (int)num;
+	complement = 0;
+	if (num == LONG_MIN)
+		num = 0;
+	if (num < 0)
 	{
-		is_negative = true;
-		digits = 8;
-		n = -(n + 1);
+		complement = (unsigned int)(-num);
+		complement = ~complement + 1;
+		n_written = ft_convert(complement, type, n_written);
 	}
 	else
-		digits = ft_digit_hex(n);
-	s = ft_calloc(digits + 1, sizeof(char));
-	ft_convert(n, s, digits - 1, is_negative);
-	if (type == 'X')
-		ft_toupper_hex(s, digits);
-	return (s);
+		n_written = ft_convert(num, type, n_written);
+	return (n_written);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mergarci <mergarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mergarci <mergarci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:13:29 by mergarci          #+#    #+#             */
-/*   Updated: 2025/02/03 20:51:04 by mergarci         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:59:34 by mergarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@ int	ft_check_placeholder(char const *s, int *i, va_list vargs)
 	else if (s[*i + 1] == 'u')
 		cont = ft_placeholder_u(vargs);
 	else if (s[*i + 1] == 'x')
-		//cont = ft_placeholder_hex(vargs, 'x');
-		cont = ft_placeholder_hex_2(vargs, 'x');
+		cont = ft_placeholder_hex(vargs, 'x');
 	else if (s[*i + 1] == 'X')
-		cont = ft_placeholder_hex_2(vargs, 'X');
-		//cont = ft_placeholder_hex(vargs, 'X');
+		cont = ft_placeholder_hex(vargs, 'X');
 	else if (s[*i + 1] == '%')
 		cont = ft_placeholder_c(vargs, '%');
 	*i += 1;
@@ -92,43 +90,15 @@ int	ft_placeholder_s(va_list vargs)
 }
 
 /*Print a void pointer address in hexadecimal*/
-/*int	ft_placeholder_p(va_list vargs)
-{
-	int				n_written;
-	unsigned long	dir_ptr;
-	char			*str_aux;
-
-	n_written = 0;
-	dir_ptr = va_arg(vargs, unsigned long );
-	if (dir_ptr != 0)
-	{
-		ft_putchar_fd('0', 1);
-		ft_putchar_fd('x', 1);
-		n_written = 2;
-		str_aux = ft_atoi_hex((dir_ptr), 'p');
-		n_written += ft_print_str(str_aux);
-		str_aux = ft_memfree(str_aux);
-	}
-	else
-		return (ft_print_str("(nil)"));
-	return (n_written);
-}*/
-
-/*Print a void pointer address in hexadecimal*/
 int	ft_placeholder_p(va_list vargs)
 {
 	int				n_written;
 	unsigned long	dir_ptr;
-	//char			*str_aux;
 
 	n_written = 0;
 	dir_ptr = va_arg(vargs, unsigned long );
 	if (dir_ptr != 0)
-	{
-		n_written = ft_convertir(dir_ptr, 'p', n_written);
-    	//printf("\n*%d*\n", n_written);
-		//ft_placeholder_hex_2(dir_ptr, 'p');
-	}
+		n_written = ft_convert(dir_ptr, 'p', n_written);
 	else
 		return (ft_print_str("(nil)"));
 	return (n_written);

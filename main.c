@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mergarci <mergarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mergarci <mergarci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:49:00 by fvizcaya          #+#    #+#             */
-/*   Updated: 2025/02/03 21:20:51 by mergarci         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:31:00 by mergarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	test9();
 
 int	main(void)
 {
-	/*printf("\n~~~~~~~test1~~~~~~~\n");
+	printf("\n~~~~~~~test1~~~~~~~\n");
 	test1();
 	printf("\n~~~~~~~test2~~~~~~~\n");
 	test2();
@@ -40,7 +40,7 @@ int	main(void)
 	printf("\n~~~~~~~test6~~~~~~~\n");
 	test6();
 	printf("\n~~~~~~~test7~~~~~~~\n");
-	test7();*/
+	test7();
 	printf("\n~~~~~~~test8~~~~~~~\n");
 	test8();
 	printf("\n~~~~~~~test9~~~~~~~\n");

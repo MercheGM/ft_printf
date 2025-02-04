@@ -11,9 +11,8 @@ NAME_LIB = libft.a
 PATH_LIB = libft
 
 SRC = 	ft_printf.c \
-		ft_printf_hex_2.c \
-		ft_printf_utils.c \
-#		ft_printf_hex_2.c
+		ft_printf_hex.c \
+		ft_printf_utils.c
 OBJ = $(SRC:.c=.o)
 
 all : $(PATH_LIB)/$(NAME_LIB) $(NAME) 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mergarci <mergarci@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mergarci <mergarci@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:17:15 by mergarci          #+#    #+#             */
-/*   Updated: 2025/02/03 20:50:02 by mergarci         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:58:47 by mergarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ int		ft_placeholder_p(va_list vargs);
 //ft_printf_utils.c
 int		ft_placeholder_d(va_list vargs);
 int		ft_placeholder_u(va_list vargs);
-//int		ft_placeholder_hex(va_list vargs, char type);
 int		ft_print_str(char *str);
 char	*ft_memfree(char *ptr);
 
-//ft_printf_hex.c 
-//char	*ft_atoi_hex(long n, char type);
-
-int ft_convertir(long int nb, char type, int n_written);
-int		ft_placeholder_hex_2(va_list vargs, char type);
+//ft_printf_hex.c
+int		ft_convert(long int nb, char type, int n_written);
+int		ft_placeholder_hex(va_list vargs, char type);
 #endif
